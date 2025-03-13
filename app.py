@@ -15,35 +15,28 @@ from tensorflow.keras.models import load_model
 import tensorflow as tf
 from tensorflow.keras.models import load_model
 
-
-MODEL_URL = "https://github.com/hamiltonrmat/testoption1A/raw/refs/heads/main/keras_Model.h5"
-LABELS_URL = "https://github.com/hamiltonrmat/testoption1A/raw/refs/heads/main/labels.txt"
-
-# Télécharger les fichiers si nécessaires
-if not os.path.exists("keras_Model.h5"):
-    with st.spinner("Téléchargement du modèle..."):
-        response = requests.get(MODEL_URL)
-        with open("keras_Model.h5", "wb") as f:
-            f.write(response.content)
-
-if not os.path.exists("labels.txt"):
-    with st.spinner("Téléchargement des étiquettes..."):
-        response = requests.get(LABELS_URL)
-        with open("labels.txt", "wb") as f:
-            f.write(response.content)
-
-# Charger le modèle
-try:
-    model = load_model("keras_Model.h5", compile=False, safe_mode=False)
-    st.success("Modèle chargé avec succès!")
-except Exception as e:
-    st.error(f"Erreur lors du chargement du modèle: {e}")
-
-
-
+def load_model_with_custom_objects(model_path):
+    # Définir les objets personnalisés pour gérer les incompatibilités
+    custom_objects = {}
+    
+    # Patch pour DepthwiseConv2D
+    if hasattr(tf.keras.layers, 'DepthwiseConv2D'):
+        original_init = tf.keras.layers.DepthwiseConv2D.__init__
+        
+        def patched_init(self, *args, **kwargs):
+            # Supprimer le paramètre 'groups' s'il existe
+            if 'groups' in kwargs:
+                del kwargs['groups']
+            return original_init(self, *args, **kwargs)
+        
+        tf.keras.layers.DepthwiseConv2D.__init__ = patched_init
+    
+    # Charger le modèle
+    model = load_model(model_path, compile=False, custom_objects=custom_objects)
+    return model
 
 # Utiliser la fonction personnalisée
-
+model = load_model_with_custom_objects("keras_Model.h5")
 
 # Configuration de la page
 st.set_page_config(page_title="Classificateur d'Images", layout="wide")
