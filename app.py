@@ -42,26 +42,6 @@ except Exception as e:
 
 
 
-def load_model_with_custom_objects(model_path):
-    # Définir les objets personnalisés pour gérer les incompatibilités
-    custom_objects = {}
-    
-    # Patch pour DepthwiseConv2D
-    if hasattr(tf.keras.layers, 'DepthwiseConv2D'):
-        original_init = tf.keras.layers.DepthwiseConv2D.__init__
-        
-        def patched_init(self, *args, **kwargs):
-            # Supprimer le paramètre 'groups' s'il existe
-            if 'groups' in kwargs:
-                del kwargs['groups']
-            return original_init(self, *args, **kwargs)
-        
-        tf.keras.layers.DepthwiseConv2D.__init__ = patched_init
-    
-    # Charger le modèle
-    model = load_model(model_path, compile=False, custom_objects=custom_objects)
-    return model
-
 # Utiliser la fonction personnalisée
 
 
