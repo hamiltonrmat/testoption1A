@@ -36,7 +36,7 @@ def load_model_with_custom_objects(model_path):
 # Utiliser la fonction personnalisée
 #model = load_model_with_custom_objects("keras_Model.h5")
 model = tf.keras.models.load_model("keras_Model.h5", compile=False)
-model.save("saved_model")  # Sauvegarde en format TensorFlow SavedModel
+model.save("saved_model/saved_model")  # Sauvegarde en format TensorFlow SavedModel
 
 # Configuration de la page
 st.set_page_config(page_title="Classificateur d'Images", layout="wide")
