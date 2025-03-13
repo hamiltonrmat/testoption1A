@@ -36,7 +36,7 @@ def load_model_with_custom_objects(model_path):
     return model
 
 # Utiliser la fonction personnalisée
-model = load_model_with_custom_objects("keras_Model.h5")
+model = load_model_with_custom_objects("keras_model.h5")
 
 # Configuration de la page
 st.set_page_config(page_title="Classificateur d'Images", layout="wide")
