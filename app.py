@@ -15,6 +15,33 @@ from tensorflow.keras.models import load_model
 import tensorflow as tf
 from tensorflow.keras.models import load_model
 
+
+MODEL_URL = "https://github.com/hamiltonrmat/testoption1A/raw/refs/heads/main/keras_Model.h5"
+LABELS_URL = "https://github.com/hamiltonrmat/testoption1A/raw/refs/heads/main/labels.txt"
+
+# Télécharger les fichiers si nécessaires
+if not os.path.exists("keras_Model.h5"):
+    with st.spinner("Téléchargement du modèle..."):
+        response = requests.get(MODEL_URL)
+        with open("keras_Model.h5", "wb") as f:
+            f.write(response.content)
+
+if not os.path.exists("labels.txt"):
+    with st.spinner("Téléchargement des étiquettes..."):
+        response = requests.get(LABELS_URL)
+        with open("labels.txt", "wb") as f:
+            f.write(response.content)
+
+# Charger le modèle
+try:
+    model = load_model("keras_Model.h5", compile=False, safe_mode=False)
+    st.success("Modèle chargé avec succès!")
+except Exception as e:
+    st.error(f"Erreur lors du chargement du modèle: {e}")
+
+
+
+
 def load_model_with_custom_objects(model_path):
     # Définir les objets personnalisés pour gérer les incompatibilités
     custom_objects = {}
