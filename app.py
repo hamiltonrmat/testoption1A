@@ -9,12 +9,6 @@ sys.setrecursionlimit(5000)
 import tensorflow as tf
 
 
-
-
-model = load_model("keras_model.h5", compile=True, safe_mode=False)
-
-
-
 from tensorflow.keras.models import load_model
 
 
@@ -42,7 +36,7 @@ def load_model_with_custom_objects(model_path):
     return model
 
 # Utiliser la fonction personnalisée
-model = load_model_with_custom_objects("keras_model.h5")
+model = load_model_with_custom_objects("keras_Model.h5")
 
 # Configuration de la page
 st.set_page_config(page_title="Classificateur d'Images", layout="wide")
