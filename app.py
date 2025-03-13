@@ -9,17 +9,8 @@ sys.setrecursionlimit(5000)
 import tensorflow as tf
 
 
+model_path = 
 
-import os
-
-# Obtenir le chemin du répertoire actuel
-current_dir = os.path.dirname(os.path.abspath(__file__))
-
-# Construire le chemin complet vers le modèle
-model_path = os.path.join("keras_Model.h5")
-labels_path = os.path.join("labels.txt")
-
-# Charger le modèle
 model = load_model(model_path, compile=False, safe_mode=False)
 
 
