@@ -3,16 +3,10 @@ from PIL import Image, ImageOps
 import numpy as np
 import os
 import sys
-
 sys.setrecursionlimit(5000)
-
 import tensorflow as tf
 
 
-from tensorflow.keras.models import load_model
-
-
-import tensorflow as tf
 from tensorflow.keras.models import load_model
 
 def load_model_with_custom_objects(model_path):
