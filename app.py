@@ -11,7 +11,7 @@ import tensorflow as tf
 
 
 
-model = load_model("keras_model.h5", compile=False, safe_mode=False)
+model = load_model("keras_model.h5", compile=True, safe_mode=False)
 
 
 
