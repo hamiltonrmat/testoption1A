@@ -9,9 +9,9 @@ sys.setrecursionlimit(5000)
 import tensorflow as tf
 
 
-model_path = "https://github.com/hamiltonrmat/testoption1A/raw/refs/heads/main/keras_model.h5"
 
-model = load_model(model_path, compile=False, safe_mode=False)
+
+model = load_model("keras_model.h5", compile=False, safe_mode=False)
 
 
 
