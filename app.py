@@ -16,8 +16,8 @@ import os
 current_dir = os.path.dirname(os.path.abspath(__file__))
 
 # Construire le chemin complet vers le modèle
-model_path = os.path.join(current_dir, "keras_Model.h5")
-labels_path = os.path.join(current_dir, "labels.txt")
+model_path = os.path.join("keras_Model.h5")
+labels_path = os.path.join("labels.txt")
 
 # Charger le modèle
 model = load_model(model_path, compile=False, safe_mode=False)
