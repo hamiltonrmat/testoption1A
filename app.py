@@ -9,7 +9,7 @@ sys.setrecursionlimit(5000)
 import tensorflow as tf
 
 
-model_path = "keras_model.h5
+model_path = "keras_model.h5"
 
 model = load_model(model_path, compile=False, safe_mode=False)
 
